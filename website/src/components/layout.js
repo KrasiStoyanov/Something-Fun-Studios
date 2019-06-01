@@ -1,21 +1,26 @@
-import React from 'react';
+import React from "react";
 
-import Header from './header';
-import Footer from './footer';
+import Header from "./header";
+import Footer from "./footer";
 
-import '../styles/index.scss';
-import layoutStyles from '../styles/layout.module.scss';
+import "../styles/index.scss";
+import layoutStyles from "../styles/layout.module.scss";
 
-const Layout = (props) => {
-    return (
-        <div className={layoutStyles.mainContainer}>
-            <div className={layoutStyles.mainContent}>
-                <Header />
-                {props.children}
+class Layout extends React.Component {
+    render() {
+        return (
+            <div className={layoutStyles.mainContainer}>
+                <div className={layoutStyles.mainContent}>
+                    <Header
+                        headerClass={this.props.headerClass}
+                        isHome={this.props.isHome}
+                    />
+                    <main>{this.props.children}</main>
+                </div>
+                <Footer />
             </div>
-            <Footer />
-        </div>
-    );
-};
+        );
+    }
+}
 
 export default Layout;

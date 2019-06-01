@@ -1,0 +1,52 @@
+@import "./variables";
+
+.sticky-navbar {
+    transition: all 0.3s ease-in-out;
+}
+
+.visible {
+    top: 0 !important;
+    transform: scale(1);
+    opacity: 1;
+    visibility: visible;
+}
+
+.hidden {
+    top: -30px !important;
+    transform: scale(0.95);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.navbar {
+    margin: 40px;
+    border-radius: $border-radius;
+    padding: $navbar-padding-y $navbar-padding-x !important;
+    background-color: $primary;
+}
+
+.nav-link {
+    color: $white;
+    padding: 10px $navbar-nav-link-padding-x !important;
+    transition: all 0.3s ease-in-out;
+    font-weight: 600;
+    font-size: 12px;
+
+    &:hover {
+        color: transparentize($color: $white, $amount: 0.3);
+    }
+}
+
+.navbar-brand {
+    height: $navbar-brand-height;
+    padding: 0;
+}
+
+.navbar-shadow {
+    position: absolute;
+    top: 40px;
+    right: 60px;
+    bottom: 40px;
+    left: 60px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+}

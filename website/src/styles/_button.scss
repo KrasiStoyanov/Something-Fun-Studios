@@ -1,0 +1,47 @@
+.btn {
+    border-radius: $border-radius;
+    outline: 0;
+    box-shadow: none;
+
+    &::focus,
+    &::focus:active,
+    &.active {
+        outline: 0;
+        box-shadow: none;
+    }
+}
+
+.btn-sm {
+    @include button-size(0, 20px, 12px, 40px, $border-radius);
+    font-weight: 600;
+}
+
+.btn-md {
+    @include button-size(0, 40px, 12px, 40px, $border-radius);
+    font-weight: 600;
+}
+
+.btn-lg {
+    @include button-size(0, 40px, 12px, 50px, $border-radius);
+    font-weight: 700;
+}
+
+.btn-icon {
+    text-align: center;
+    font-family: 'icon-font';
+}
+
+.btn-icon-sm {
+    @include button-size(0, 0, 12px, 30px, $border-radius);
+    width: 30px;
+}
+
+.btn-icon-md {
+    @include button-size(0, 0, 12px, 40px, $border-radius);
+    width: 40px;
+}
+
+.btn-icon-lg {
+    @include button-size(0, 0, 14px, 50px, $border-radius);
+    width: 50px;
+}

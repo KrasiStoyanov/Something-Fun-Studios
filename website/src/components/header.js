@@ -1,13 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import styles from '../styles/header.module.scss';
+import NormalNavbar from "./normalNavbar";
+import StickyNavbar from "./stickyNavbar";
+import HeaderHome from "./headerHome";
 
-const Header = () => {
-    return (
-        <header>
-            <p className={styles.paragraph}>Header</p>
-        </header>
-    );
-};
+class Header extends React.Component {
+    render() {
+        return (
+            <header className={this.props.headerClass}>
+                <NormalNavbar />
+                <StickyNavbar />
+
+				{this.props.isHome ? <HeaderHome /> : ''}
+            </header>
+        );
+    }
+}
 
 export default Header;
