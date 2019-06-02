@@ -1,7 +1,7 @@
 import React from "react";
 import { graphql } from "gatsby";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import Disqus from "disqus-react";
+import { DiscussionEmbed } from "disqus-react";
 
 import Layout from "../components/layout";
 import Head from "../components/head";
@@ -14,6 +14,7 @@ export const query = graphql`
             body {
                 json
             }
+            slug
         }
     }
 `;
@@ -31,8 +32,8 @@ const Blog = props => {
     };
 
     const disqusConfig = {
-        url: "somethingfunstudio.com",
-        identifier: "slug",
+        identifier: props.data.contentfulBlogPost.slug,
+        title: props.data.contentfulBlogPost.title,
     };
 
     return (
@@ -44,7 +45,10 @@ const Blog = props => {
                 props.data.contentfulBlogPost.body.json,
                 options
             )}
-            <Disqus.DiscussionEmbed shortname="somethingfunstudio" config={disqusConfig} />
+            <DiscussionEmbed
+                shortname="somethingfunstudio"
+                config={disqusConfig}
+            />
         </Layout>
     );
 };

@@ -12,44 +12,92 @@ class DevLogPage extends React.PureComponent {
         let tags = this.saveTags(props.data);
         this.state = {
             data: this.props.data,
+            copyOfFilteredData: this.props.data,
             tags: tags,
+            activeTagFilters: [],
         };
     }
 
     saveTags(data) {
         let tags = [];
         data.forEach(d => {
-            if (tags.indexOf(d.tag) === -1) {
-                tags.push(d.tag);
+            if (tags.indexOf(d.node.tag) === -1) {
+                tags.push(d.node.tag);
             }
         });
 
         return tags;
     }
 
-    filterTag(tag) {
-        // TODO: Save the state of the pressed button.
-        // TODO: Every time a button is pressed, consider the previously active tag filters and add the filtered items based on all tags, not only the one pressed.
-        // TODO: If a button is pressed and the user presses it again - the filter is deactivated and the button changes its state to normal.
-
-        // If the tag equals "none" - all filters applied are removed and the original data is being shown.
+    filterTag(tag, isButtonPressed) {
         if (tag === "none") {
+            let filterButtons = document.getElementsByClassName(
+                "filter-button"
+            );
+
+            for (let index = 0; index < filterButtons.length; index += 1) {
+                filterButtons[index].classList.remove("active");
+            }
+
             this.setState({
                 data: this.props.data,
+                activeTagFilters: [],
             });
         } else {
+            let indexOfTag = this.state.activeTagFilters.indexOf(tag);
+            if (indexOfTag === -1) {
+                this.state.activeTagFilters.push(tag);
+            } else if (indexOfTag > -1 && isButtonPressed) {
+                this.state.activeTagFilters.splice(indexOfTag, 1);
+            }
+
+            let newData = [];
+            this.state.activeTagFilters.forEach(t => {
+                this.props.data.forEach(i => {
+                    if (i.node.tag === t) {
+                        newData.push(i);
+                    }
+                });
+            });
+
+            if (this.state.activeTagFilters.length === 0) {
+                newData = this.props.data;
+            }
+
+            newData.sort(this.sortByPublishedDate);
+
             this.setState({
-                data: this.props.data.filter(item => item.tag === tag),
+                data: newData,
+                copyOfFilteredData: newData,
             });
         }
     }
 
+    sortByPublishedDate(a, b) {
+        console.log(a.node.publishedDate);
+        if (a.node.publishedDate > b.node.publishedDate) {
+            return -1;
+        }
+
+        if (a.node.publishedDate < b.node.publishedDate) {
+            return 1;
+        }
+
+        return 0;
+    }
+
     search(e) {
         const phrase = e.target.value;
+        let newData = this.state.data.filter(
+            item => item.node.title.indexOf(phrase) !== -1
+        );
+        
+        if (phrase.length === 0) {
+            newData = this.state.copyOfFilteredData;
+        }
+
         this.setState({
-            data: this.props.data.filter(
-                item => item.title.indexOf(phrase) !== -1
-            ),
+            data: newData,
         });
     }
 
@@ -59,10 +107,7 @@ class DevLogPage extends React.PureComponent {
                 <Head title="Dev Log" />
                 <h1>Dev Log</h1>
                 <Button
-                    onClick={(e) => {
-                        console.log(e.target.className += " active");
-                        this.filterTag("none")
-                    }}
+                    onClick={e => this.filterTag("none")}
                     className="btn btn-md"
                     outline
                     color="secondary"
@@ -73,8 +118,26 @@ class DevLogPage extends React.PureComponent {
                     return (
                         <Button
                             key={t}
-                            onClick={() => this.filterTag(t)}
-                            className="btn btn-md"
+                            onClick={e => {
+                                let isFilterActive = false;
+                                let classNames = e.target.className;
+                                let indexOfActiveClass = classNames.indexOf(
+                                    "active"
+                                );
+                                if (indexOfActiveClass > -1) {
+                                    isFilterActive = true;
+                                    e.target.className = classNames.replace(
+                                        " active",
+                                        ""
+                                    );
+                                } else {
+                                    isFilterActive = false;
+                                    e.target.className += " active";
+                                }
+
+                                this.filterTag(t, isFilterActive);
+                            }}
+                            className="btn btn-md filter-button"
                             outline
                             color="secondary"
                         >
@@ -82,13 +145,13 @@ class DevLogPage extends React.PureComponent {
                         </Button>
                     );
                 })}
-                <Input type="text" onKeyUp={e => this.search(e)} />
+                <Input type="text" onChange={e => this.search(e)} />
                 <ol>
-                    {this.state.data.map(edge => {
+                    {this.state.data.map((e, i) => {
                         return (
-                            <li>
-                                <Link to={`/blog/#`}>
-                                    <h2>{edge.title}</h2>
+                            <li key={`${i}: ${e.node.title}`}>
+                                <Link to={`/blog/${e.node.slug}`}>
+                                    <h2>{e.node.title}</h2>
                                 </Link>
                             </li>
                         );
@@ -112,40 +175,14 @@ export default () => {
                                 title
                                 slug
                                 publishedDate(formatString: "MMMM Do, YYYY")
+                                tag
                             }
                         }
                     }
                 }
             `}
             render={data => (
-                <DevLogPage
-                    data={[
-                        {
-                            tag: "tag1",
-                            title: "Post from tag1 1",
-                        },
-                        {
-                            tag: "tag1",
-                            title: "Post from tag1 2",
-                        },
-                        {
-                            tag: "tag2",
-                            title: "Post from tag2 1",
-                        },
-                        {
-                            tag: "tag3",
-                            title: "Post from tag3 1",
-                        },
-                        {
-                            tag: "tag3",
-                            title: "Post from tag3 2",
-                        },
-                        {
-                            tag: "tag3",
-                            title: "Post from tag3 3",
-                        },
-                    ]}
-                />
+                <DevLogPage data={data.allContentfulBlogPost.edges} />
             )}
         />
     );
