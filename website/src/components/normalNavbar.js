@@ -29,7 +29,7 @@ class NormalNavbar extends React.Component {
 
     render() {
         return (
-            <Navbar color="light" light expand="md">
+            <Navbar className="position-absolute" color="light" light expand="md">
                 <NavbarBrand href="/">
                     <img src={logo} alt="Logo" />
                 </NavbarBrand>

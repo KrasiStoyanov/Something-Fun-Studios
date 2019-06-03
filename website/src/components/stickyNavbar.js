@@ -135,9 +135,9 @@ class StickyNavbar extends React.Component {
                                     Contact us
                                 </NavLink>
                             </NavItem>
-                            <NavItem>
+                            <NavItem className="ml-1">
                                 <Button
-                                    className="btn-icon btn-icon-md"
+                                    className="btn-icon btn-icon-md ml-2"
                                     color="secondary"
                                 >
                                     

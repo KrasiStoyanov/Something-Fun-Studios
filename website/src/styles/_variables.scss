@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap");
 
+// Colors
 $red: #f74b4b;
 $yellow: #fdd328;
 $white: #fff;
@@ -10,9 +11,11 @@ $secondary: $red;
 // Typography
 $font-family-sans-serif: "Montserrat", sans-serif;
 
+// Border
 $border-radius: 5px;
 $border-radius-lg: 10px;
 
+// Navbar
 $navbar-padding-y: 15px;
 $navbar-padding-x: 20px;
 
@@ -20,3 +23,6 @@ $navbar-nav-link-padding-x: 15px;
 
 $navbar-brand-height: 50px;
 $navbar-brand-padding-y: 0;
+
+// Spacing
+$spacer: 20px;

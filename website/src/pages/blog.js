@@ -30,11 +30,13 @@ class DevLogPage extends React.PureComponent {
     }
 
     filterTag(tag, isButtonPressed) {
+        // If the provided tag is none - clear all filters.
         if (tag === "none") {
             let filterButtons = document.getElementsByClassName(
                 "filter-button"
             );
 
+            // Go through all filter buttons and remove their active class.
             for (let index = 0; index < filterButtons.length; index += 1) {
                 filterButtons[index].classList.remove("active");
             }
@@ -44,13 +46,10 @@ class DevLogPage extends React.PureComponent {
                 activeTagFilters: [],
             });
         } else {
-            let indexOfTag = this.state.activeTagFilters.indexOf(tag);
-            if (indexOfTag === -1) {
-                this.state.activeTagFilters.push(tag);
-            } else if (indexOfTag > -1 && isButtonPressed) {
-                this.state.activeTagFilters.splice(indexOfTag, 1);
-            }
+            // Update the list containing all active tags based on the currently selected tag and if the button has already been pressed.
+            this.updateActiveTagsList(tag, isButtonPressed);
 
+            // Go through all the active tag filters and through all the data and find the appropriate data.
             let newData = [];
             this.state.activeTagFilters.forEach(t => {
                 this.props.data.forEach(i => {
@@ -60,10 +59,12 @@ class DevLogPage extends React.PureComponent {
                 });
             });
 
+            // If there are currently no active tag filters - return the original data.
             if (this.state.activeTagFilters.length === 0) {
                 newData = this.props.data;
             }
 
+            // Sort the filtered data by published date.
             newData.sort(this.sortByPublishedDate);
 
             this.setState({
@@ -73,8 +74,16 @@ class DevLogPage extends React.PureComponent {
         }
     }
 
+    updateActiveTagsList(tag, isButtonPressed) {
+        let indexOfTag = this.state.activeTagFilters.indexOf(tag);
+        if (indexOfTag === -1) {
+            this.state.activeTagFilters.push(tag);
+        } else if (indexOfTag > -1 && isButtonPressed) {
+            this.state.activeTagFilters.splice(indexOfTag, 1);
+        }
+    }
+
     sortByPublishedDate(a, b) {
-        console.log(a.node.publishedDate);
         if (a.node.publishedDate > b.node.publishedDate) {
             return -1;
         }
@@ -91,7 +100,15 @@ class DevLogPage extends React.PureComponent {
         let newData = this.state.data.filter(
             item => item.node.title.indexOf(phrase) !== -1
         );
-        
+
+        // If the provided search options do not find anything in the currently filtered data, try and find it in the original one.
+        if (newData.length === 0) {
+            newData = this.state.copyOfFilteredData.filter(
+                item => item.node.title.indexOf(phrase) !== -1
+            );
+        }
+
+        // If the user deletes everything from the searchbar it should show all the filtered data.
         if (phrase.length === 0) {
             newData = this.state.copyOfFilteredData;
         }
@@ -145,7 +162,11 @@ class DevLogPage extends React.PureComponent {
                         </Button>
                     );
                 })}
-                <Input type="text" onChange={e => this.search(e)} />
+                <Input
+                    type="text"
+                    onChange={e => this.search(e)}
+                    onKeyDown={e => this.search(e)}
+                />
                 <ol>
                     {this.state.data.map((e, i) => {
                         return (
