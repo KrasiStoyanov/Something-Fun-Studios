@@ -7,7 +7,7 @@ import HeaderHome from "./headerHome";
 class Header extends React.Component {
     render() {
         return (
-            <header className={this.props.headerClass}>
+            <header className={`${this.props.headerClass} overflow-hidden`}>
                 <NormalNavbar />
                 <StickyNavbar />
 

@@ -1,0 +1,74 @@
+.carousel-item {
+    .offset-title {
+        transition: opacity 0.4s ease-in-out;
+        opacity: 0;
+    }
+
+    .heading {
+        transition: opacity .5s ease-in-out;
+        transition-delay: .3s;
+        opacity: 0;
+    }
+
+    .btn {
+        transition: opacity .3s ease-in-out;
+        transition-delay: .6s;
+        opacity: 0;
+    }
+
+    &.active {
+        .offset-title,
+        .heading,
+        .btn {
+            opacity: 1;
+        }
+    }
+}
+
+// Controls
+.carousel-control-prev,
+.carousel-control-next {
+    justify-content: flex-start;
+    width: 80px;
+    cursor: pointer;
+    top: 50%;
+    bottom: initial;
+    transform: translateY(-50%);
+    padding: $spacer * 0.5 0;
+    opacity: 0.4;
+    transition: opacity 0.3s ease-in-out;
+
+    .sr-only {
+        font-weight: 700;
+        font-size: 20px;
+        position: static;
+        width: auto;
+        height: auto;
+    }
+
+    &:hover,
+    &:focus {
+        opacity: 1;
+    }
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-image: url("../images/carousel-control-icon-02.svg");
+    width: 40px;
+    height: 3px;
+}
+
+.carousel-control-prev {
+    .sr-only {
+        padding-left: $spacer * 0.5;
+    }
+}
+
+.carousel-control-next {
+    flex-direction: row-reverse;
+
+    .sr-only {
+        padding-right: $spacer * 0.5;
+    }
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import {
+    Button,
     Collapse,
     Navbar,
     NavbarToggler,
@@ -10,6 +11,7 @@ import {
 } from "reactstrap";
 
 import logo from "../images/logo.svg";
+import NormalNavbarStyles from "../styles/_normalNavbar.module.scss";
 
 class NormalNavbar extends React.Component {
     constructor(props) {
@@ -29,25 +31,69 @@ class NormalNavbar extends React.Component {
 
     render() {
         return (
-            <Navbar className="position-absolute" color="light" light expand="md">
-                <NavbarBrand href="/">
-                    <img src={logo} alt="Logo" />
-                </NavbarBrand>
-                <NavbarToggler onClick={this.toggle} />
-                <Collapse isOpen={this.state.isOpen} navbar>
-                    <Nav className="ml-auto" navbar>
-                        <NavItem>
-                            <NavLink href="/">Home</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="/blog/">Dev Log</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink href="/contact/">Contact us</NavLink>
-                        </NavItem>
-                    </Nav>
-                </Collapse>
-            </Navbar>
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-12">
+                        <Navbar
+                            className={`${
+                                NormalNavbarStyles.navbar
+                            } position-absolute pt-4 pr-0 pb-4 pl-0 w-100`}
+                            expand="md"
+                        >
+                            <NavbarBrand href="/">
+                                <img
+                                    className={NormalNavbarStyles.navbarBrand}
+                                    src={logo}
+                                    alt="Logo"
+                                />
+                            </NavbarBrand>
+                            <NavbarToggler onClick={this.toggle} />
+                            <Collapse isOpen={this.state.isOpen} navbar>
+                                <Nav className="ml-auto" navbar>
+                                    <NavItem>
+                                        <NavLink
+                                            className={
+                                                NormalNavbarStyles.navLink
+                                            }
+                                            href="/"
+                                        >
+                                            Home
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink
+                                            className={
+                                                NormalNavbarStyles.navLink
+                                            }
+                                            href="/blog/"
+                                        >
+                                            Dev Log
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink
+                                            className={
+                                                NormalNavbarStyles.navLink
+                                            }
+                                            href="/contact/"
+                                        >
+                                            Contact us
+                                        </NavLink>
+                                    </NavItem>
+                                    <NavItem className="ml-1">
+                                        <Button
+                                            className="btn-icon btn-icon-md ml-2"
+                                            color="secondary"
+                                        >
+                                            
+                                        </Button>
+                                    </NavItem>
+                                </Nav>
+                            </Collapse>
+                        </Navbar>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
