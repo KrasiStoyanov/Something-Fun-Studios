@@ -1,6 +1,7 @@
 import React from "react";
 
 import Header from "./header";
+import ScrollToTop from "./scrollToTop";
 import Footer from "./footer";
 
 import "../styles/index.scss";
@@ -17,6 +18,7 @@ class Layout extends React.Component {
                     />
                     <main>{this.props.children}</main>
                 </div>
+                <ScrollToTop/>
                 <Footer />
             </div>
         );

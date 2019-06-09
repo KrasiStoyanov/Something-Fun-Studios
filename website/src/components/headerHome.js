@@ -1,29 +1,16 @@
 import React from "react";
 import { Button, Carousel, CarouselItem, CarouselControl } from "reactstrap";
+import { Link, graphql, StaticQuery } from "gatsby";
 
 import HeaderHomeStyles from "./headerHome.module.scss";
-
-const items = [
-    {
-        title: "Reporting for duty",
-        offsetTitle: "Astro",
-    },
-    {
-        title: "Slide 2",
-        offsetTitle: "1234",
-    },
-    {
-        title: "Slide 3",
-        offsetTitle: "Aasd",
-    },
-];
 
 class HeaderHome extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            data: this.props.data,
             activeIndex: 0,
-            previousControl: items.length,
+            previousControl: this.props.data.length,
             nextControl: 2,
         };
 
@@ -63,13 +50,13 @@ class HeaderHome extends React.Component {
         let index = this.state.activeIndex;
         if (next) {
             index =
-                this.state.activeIndex === items.length - 1
+                this.state.activeIndex === this.state.data.length - 1
                     ? 0
                     : this.state.activeIndex + 1;
         } else {
             index =
                 this.state.activeIndex === 0
-                    ? items.length - 1
+                    ? this.state.data.length - 1
                     : this.state.activeIndex - 1;
         }
 
@@ -78,8 +65,10 @@ class HeaderHome extends React.Component {
 
     renderIndexToControls(next) {
         const activeIndex = this.getNextOrPreviousIndex(next);
-        let previousControl = activeIndex <= 0 ? items.length : activeIndex;
-        let nextControl = activeIndex >= items.length - 1 ? 1 : activeIndex + 2;
+        let previousControl =
+            activeIndex <= 0 ? this.state.data.length : activeIndex;
+        let nextControl =
+            activeIndex >= this.state.data.length - 1 ? 1 : activeIndex + 2;
 
         this.setState({
             activeIndex,
@@ -91,13 +80,13 @@ class HeaderHome extends React.Component {
     render() {
         const { activeIndex } = this.state;
 
-        const slides = items.map(item => {
+        const slides = this.state.data.map(item => {
             return (
                 <CarouselItem
                     className="col-sm-12 h-100"
                     onExiting={this.onExiting}
                     onExited={this.onExited}
-                    key={item.title}
+                    key={item.node.carouselTitle}
                 >
                     <div className="container h-100">
                         <div className="row h-100 align-items-center">
@@ -108,19 +97,24 @@ class HeaderHome extends React.Component {
                                             HeaderHomeStyles.offsetTitle
                                         } offset-title text-uppercase`}
                                     >
-                                        {item.offsetTitle}
+                                        {item.node.offsetTitle}
                                     </span>
                                     <span
                                         className={`${
                                             HeaderHomeStyles.title
                                         } heading`}
                                     >
-                                        {item.title}
+                                        {item.node.carouselTitle}
                                     </span>
                                 </h1>
-                                <Button className="btn-lg" color="secondary">
-                                    Discover More
-                                </Button>
+                                <Link to={`/blog/${item.node.slug}`}>
+                                    <Button
+                                        className="btn-lg"
+                                        color="secondary"
+                                    >
+                                        Discover More
+                                    </Button>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -156,4 +150,28 @@ class HeaderHome extends React.Component {
     }
 }
 
-export default HeaderHome;
+export default () => {
+    return (
+        <StaticQuery
+            query={graphql`
+                query {
+                    allContentfulBlogPost(
+                        sort: { fields: publishedDate, order: DESC }
+                        limit: 3
+                    ) {
+                        edges {
+                            node {
+                                carouselTitle
+                                offsetTitle
+                                slug
+                            }
+                        }
+                    }
+                }
+            `}
+            render={data => (
+                <HeaderHome data={data.allContentfulBlogPost.edges} />
+            )}
+        />
+    );
+};

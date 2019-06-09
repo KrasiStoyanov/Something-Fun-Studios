@@ -4,6 +4,8 @@
 $red: #f74b4b;
 $yellow: #fdd328;
 $white: #fff;
+$dark: #202125;
+$light: #8d8d8d;
 
 $primary: $yellow;
 $secondary: $red;
@@ -26,3 +28,6 @@ $navbar-brand-padding-y: 0;
 
 // Spacing
 $spacer: 20px;
+
+// Z Index
+$zindex-navbar-normal: 1030;
