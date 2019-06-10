@@ -1,0 +1,31 @@
+.modal {
+    .modal-xl {
+    }
+
+    .modal-header {
+        border: 0;
+    }
+
+    .modal-content {
+        background-color: transparent;
+        border: 0;
+    }
+}
+
+.modal-backdrop {
+    &.show {
+        opacity: 0.8;
+    }
+}
+
+#close-button {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    transition: all 0.3s ease-in-out;
+
+    &.invisible {
+        visibility: hidden;
+        opacity: 0;
+    }
+}

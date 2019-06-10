@@ -25,7 +25,7 @@ class ScrollToTop extends React.Component {
                 color="secondary"
                 onClick={() => this.scrollToTop("header")}
             >
-                
+                <i className="icon-chevron-up" />
             </Button>
         );
     }

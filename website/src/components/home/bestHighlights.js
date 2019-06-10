@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+import { graphql, StaticQuery } from "gatsby";
 
 import highlightsThumbnail from "../../images/highlights-thumbnail.jpg";
 
@@ -27,6 +28,17 @@ class BestHighlightsSection extends React.Component {
     }
 
     render() {
+        const closeButton = (
+            <Button
+                id="close-button"
+                className="btn-icon btn-icon-sm"
+                color="secondary"
+                onClick={this.toggleVideo}
+            >
+                <i className="icon-x" />
+            </Button>
+        );
+
         return (
             <section className="section highlights bg-dark text-white py-5">
                 <div className="container py-5">
@@ -71,34 +83,51 @@ class BestHighlightsSection extends React.Component {
                 <Modal
                     isOpen={this.state.modal}
                     toggle={this.toggleVideo}
-                    className={this.props.className}
+                    className="modal-xl"
+                    centered={true}
+                    external={closeButton}
                 >
-                    <ModalHeader toggle={this.toggleVideo}>
-                        Modal title
-                    </ModalHeader>
                     <ModalBody>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip ex
-                        ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit
-                        anim id est laborum.
+                        {this.props.data.map(e => {
+                            if (
+                                e.node.frontmatter.title === "Best Highlights"
+                            ) {
+                                return (
+                                    <div
+                                        dangerouslySetInnerHTML={{
+                                            __html: e.node.html,
+                                        }}
+                                    />
+                                );
+                            }
+                        })}
                     </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={this.toggleVideo}>
-                            Do Something
-                        </Button>{" "}
-                        <Button color="secondary" onClick={this.toggleVideo}>
-                            Cancel
-                        </Button>
-                    </ModalFooter>
                 </Modal>
             </section>
         );
     }
 }
 
-export default BestHighlightsSection;
+export default () => {
+    return (
+        <StaticQuery
+            query={graphql`
+                {
+                    allMarkdownRemark {
+                        edges {
+                            node {
+                                html
+                                frontmatter {
+                                    title
+                                }
+                            }
+                        }
+                    }
+                }
+            `}
+            render={data => (
+                <BestHighlightsSection data={data.allMarkdownRemark.edges} />
+            )}
+        />
+    );
+};
