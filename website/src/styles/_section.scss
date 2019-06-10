@@ -11,6 +11,30 @@
     .description {
         font-size: $font-size-base * 0.875;
     }
+
+    .picture-card {
+        padding: $spacer * 2.5;
+        border-radius: $border-radius-lg;
+        overflow: hidden;
+        background-size: cover;
+
+        .title {
+            font-weight: 900;
+            line-height: $font-size-base * 4.375;
+        }
+
+        .sub-title {
+            font-size: $font-size-base * 0.875;
+            line-height: initial;
+            opacity: 0.55;
+        }
+
+        .description {
+            font-size: $font-size-base * 0.875;
+            line-height: $font-size-base * 1.625;
+            font-weight: 500;
+        }
+    }
 }
 
 @include media-breakpoint-down(md) {

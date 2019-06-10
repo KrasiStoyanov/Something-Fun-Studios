@@ -1,0 +1,16 @@
+.overlay {
+    opacity: .9;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.overlay-primary {
+    background-color: $primary;
+}
+
+.overlay-secondary {
+    background-color: $secondary;
+}

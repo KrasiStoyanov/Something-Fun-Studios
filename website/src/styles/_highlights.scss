@@ -1,0 +1,15 @@
+.section {
+    &.highlights {
+        .title {
+            line-height: $font-size-base * 3.625;
+        }
+
+        .sub-title {
+            font-weight: 500;
+        }
+
+        .description {
+            z-index: 1;
+        }
+    }
+}
