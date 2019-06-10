@@ -10,10 +10,8 @@ class ScrollToTop extends React.Component {
         this.scrollToTop = this.scrollToTop.bind(this);
     }
 
-    scrollToTop() {
-        window.scroll({
-            top: 0,
-            left: 0,
+    scrollToTop(id) {
+        document.querySelector(`#${id}`).scrollIntoView({
             behavior: "smooth",
         });
     }
@@ -25,7 +23,7 @@ class ScrollToTop extends React.Component {
                     ScrollToTopStyles.button
                 } btn-icon btn-icon-sm ml-2`}
                 color="secondary"
-                onClick={this.scrollToTop}
+                onClick={() => this.scrollToTop("header")}
             >
                 
             </Button>

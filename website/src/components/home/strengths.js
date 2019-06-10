@@ -31,7 +31,7 @@ const strengths = [
 class StrengthsSection extends React.Component {
     render() {
         return (
-            <section className="section section-sm bg-dark text-white text-center pt-5 pb-5 d-flex align-items-center">
+            <section className="section strengths bg-dark text-white text-center pt-5 pb-5 d-flex align-items-center">
                 <div className="container">
                     <div className="row">
                         {strengths.map((s, i) => (

@@ -1,0 +1,30 @@
+.section {
+    &.strengths {
+        height: 300px;
+
+        .image {
+            max-width: 40px;
+            max-height: 40px;
+        }
+
+        .description {
+            font-size: $font-size-base * 0.875;
+        }
+    }
+}
+
+@include media-breakpoint-down(md) {
+    .section {
+        &.section-sm {
+            height: auto;
+        }
+
+        .strength {
+            margin-bottom: $spacer * 1.5;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

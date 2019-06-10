@@ -11,12 +11,19 @@ class BestHighlightsSection extends React.Component {
         };
 
         this.toggleVideo = this.toggleVideo.bind(this);
+        this.scrollToGames = this.scrollToGames.bind(this);
     }
 
     toggleVideo() {
         this.setState(prevState => ({
             modal: !prevState.modal,
         }));
+    }
+
+    scrollToGames(section) {
+        document.querySelector(`.${section}`).scrollIntoView({
+            behavior: "smooth",
+        });
     }
 
     render() {
@@ -31,13 +38,32 @@ class BestHighlightsSection extends React.Component {
                             <h4 className="title">
                                 Best Highlights of the Demonstration
                             </h4>
-                            <Button className="btn-md mt-4" color="secondary">
+                            <Button
+                                className="btn-md mt-4"
+                                color="secondary"
+                                onClick={() =>
+                                    this.scrollToGames("featured-games")
+                                }
+                            >
+                                <i className="icon-games mr-2" />
                                 Our Games
                             </Button>
                         </div>
                         <div className="col-md-7 offset-md-4 col-sm-12">
-                            <div onClick={this.toggleVideo}>
-                                <img src={highlightsThumbnail} alt="Video" />
+                            <div
+                                className="video-wrapper position-relative d-flex flex-column align-items-end"
+                                onClick={this.toggleVideo}
+                            >
+                                <div className="overlay overlay-dark" />
+                                <div className="shadow" />
+                                <div className="play-button d-flex align-items-center justify-content-center">
+                                    <i className="icon-play" />
+                                </div>
+                                <img
+                                    className="image"
+                                    src={highlightsThumbnail}
+                                    alt="Video"
+                                />
                             </div>
                         </div>
                     </div>
@@ -47,7 +73,9 @@ class BestHighlightsSection extends React.Component {
                     toggle={this.toggleVideo}
                     className={this.props.className}
                 >
-                    <ModalHeader toggle={this.toggleVideo}>Modal title</ModalHeader>
+                    <ModalHeader toggle={this.toggleVideo}>
+                        Modal title
+                    </ModalHeader>
                     <ModalBody>
                         Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit, sed do eiusmod tempor incididunt ut labore et

@@ -140,7 +140,7 @@ class StickyNavbar extends React.Component {
                                     className="btn-icon btn-icon-md ml-2"
                                     color="secondary"
                                 >
-                                    
+                                    <i className="icon-star" />
                                 </Button>
                             </NavItem>
                         </Nav>

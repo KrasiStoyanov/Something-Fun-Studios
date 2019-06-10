@@ -2,6 +2,7 @@
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
+@import "./iconSet";
 @import "./typography";
 @import "./button";
 @import "./header";
@@ -10,5 +11,6 @@
 @import "./overlay";
 
 // Sections
+@import "./strengths";
 @import "./aboutUs";
 @import "./highlights";

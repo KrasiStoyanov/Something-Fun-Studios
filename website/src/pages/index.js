@@ -5,14 +5,16 @@ import Head from "../components/head";
 import StrengthsSection from "../components/home/strengths";
 import AboutUsSection from "../components/home/aboutUs";
 import BestHighlightsSection from "../components/home/bestHighlights";
+import FeaturedGamesSection from "../components/home/featuredGames";
 
 const IndexPage = () => {
     return (
         <Layout headerClass="height-100 d-flex flex-column" isHome={true}>
             <Head title="Home" />
-			<StrengthsSection />
-			<AboutUsSection />
+            <StrengthsSection />
+            <AboutUsSection />
             <BestHighlightsSection />
+            <FeaturedGamesSection />
         </Layout>
     );
 };
