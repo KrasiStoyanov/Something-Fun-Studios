@@ -43,7 +43,7 @@ class BestHighlightsSection extends React.Component {
             <section className="section highlights bg-dark text-white py-5">
                 <div className="container py-5">
                     <div className="row py-4 align-items-center">
-                        <div className="description col-md-6 offset-md-1 col-sm-12 position-absolute">
+                        <div className="description offset-lg-1 col-md-6 offset-md-1 col-sm-12 position-absolute">
                             <p className="sub-title text-light m-0">
                                 Demonstration Day Block 3
                             </p>
@@ -94,6 +94,7 @@ class BestHighlightsSection extends React.Component {
                             ) {
                                 return (
                                     <div
+                                        key={e.node.frontmatter.title}
                                         dangerouslySetInnerHTML={{
                                             __html: e.node.html,
                                         }}

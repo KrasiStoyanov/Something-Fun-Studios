@@ -92,18 +92,10 @@ class HeaderHome extends React.Component {
                         <div className="row h-100 align-items-center">
                             <div className="col-lg-7 offset-lg-1">
                                 <h1 className="text-uppercase mb-4 position-relative">
-                                    <span
-                                        className={`${
-                                            HeaderHomeStyles.offsetTitle
-                                        } offset-title text-uppercase`}
-                                    >
+                                    <span className={`${HeaderHomeStyles.offsetTitle} offset-title light text-uppercase`}>
                                         {item.node.offsetTitle}
                                     </span>
-                                    <span
-                                        className={`${
-                                            HeaderHomeStyles.title
-                                        } heading`}
-                                    >
+                                    <span className="heading">
                                         {item.node.carouselTitle}
                                     </span>
                                 </h1>

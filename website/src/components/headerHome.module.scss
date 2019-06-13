@@ -1,16 +1,4 @@
-@import "../styles/variables";
-
-.title {
-    z-index: 1;
-}
-
 .offset-title {
-    position: absolute;
-    display: block;
-    left: 50px;
     top: -55px;
-    font-size: 300px;
-    color: transparentize($color: $white, $amount: 0.8);
-    pointer-events: none;
-    z-index: 0;
+    left: 50px;
 }

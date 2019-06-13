@@ -11,6 +11,10 @@
     }
 }
 
+.btn-outline-secondary {
+    color: $light;
+}
+
 .btn-sm {
     @include button-size(0, 20px, 12px, 40px, $border-radius);
     font-weight: 600;
@@ -28,7 +32,7 @@
 
 .btn-icon {
     text-align: center;
-    font-family: 'icon-font';
+    font-family: "icon-font";
 }
 
 .btn-icon-sm {

@@ -1,0 +1,24 @@
+.section {
+    &.featured-games {
+        padding: $spacer * 15 0 $spacer * 7.5 0;
+
+        .offset-title {
+            left: 0;
+            top: -200px;
+        }
+
+        .games-wrapper {
+            height: 400px;
+
+            .game-thumbnail {
+                background-color: $gray-100;
+                border-radius: $border-radius;
+            }
+
+            .game-description {
+                line-height: $font-size-base * 1.625;
+                font-size: $font-size-base * 0.875;
+            }
+        }
+    }
+}
