@@ -6,6 +6,7 @@ import StrengthsSection from "../components/home/strengths";
 import AboutUsSection from "../components/home/aboutUs";
 import BestHighlightsSection from "../components/home/bestHighlights";
 import FeaturedGamesSection from "../components/home/featuredGames";
+import BestCapturesSection from "../components/home/bestCaptures";
 
 const IndexPage = () => {
     return (
@@ -15,6 +16,7 @@ const IndexPage = () => {
             <AboutUsSection />
             <BestHighlightsSection />
             <FeaturedGamesSection />
+            <BestCapturesSection />
         </Layout>
     );
 };

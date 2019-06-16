@@ -22,7 +22,7 @@ class FeaturedGamesSection extends React.Component {
                                         <div className="game-thumbnail h-100 w-100"></div>
                                     </div>
                                     <div className="col-sm-12 col-md-8">
-                                        <h5 className="text-uppercase text-light mb-4">
+                                        <h5 className="text-uppercase text-light mb-4 font-weight-normal">
                                             Astro
                                             <span className="font-weight-extra-bold text-secondary">
                                                 Trip
