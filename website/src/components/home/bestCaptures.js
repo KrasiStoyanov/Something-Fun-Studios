@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+import { Button, Modal, ModalBody } from "reactstrap";
 import Masonry from "./Masonry";
 
 import image1Small from "../../images/captures/1.jpg";
@@ -112,13 +112,14 @@ class BestCapturesSection extends React.Component {
                                 {this.state.smallImages.map(i => {
                                     return (
                                         <div
+                                            key={i.id}
                                             className="tile position-relative"
                                             onClick={() => this.toggleModal(i)}
                                         >
                                             <div className="overlay overlay-dark" />
                                             <img
                                                 className="w-100"
-                                                key={i.id}
+                                                alt={i.id}
                                                 src={i.src}
                                             />
                                         </div>
@@ -140,6 +141,7 @@ class BestCapturesSection extends React.Component {
                             <div className="row">
                                 <div className="col-md-10 offset-md-1 col-sm-12">
                                     <img
+                                        alt=""
                                         src={this.state.activeImage}
                                         className="w-100"
                                     />

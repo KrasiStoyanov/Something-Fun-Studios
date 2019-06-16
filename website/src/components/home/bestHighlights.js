@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+import { Button, Modal, ModalBody } from "reactstrap";
 import { graphql, StaticQuery } from "gatsby";
 
 import highlightsThumbnail from "../../images/highlights-thumbnail.jpg";
@@ -101,6 +101,8 @@ class BestHighlightsSection extends React.Component {
                                     />
                                 );
                             }
+
+                            return null;
                         })}
                     </ModalBody>
                 </Modal>

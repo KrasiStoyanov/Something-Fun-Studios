@@ -1,0 +1,83 @@
+.section {
+    &.the-team {
+        padding: $spacer * 15 0 $spacer * 6 0;
+
+        .offset-title {
+            left: 0;
+            top: -200px;
+        }
+
+        .shadow {
+            transition: all 0.3s ease-in-out;
+            position: absolute;
+            top: 0;
+            right: $spacer * 1.75;
+            bottom: 0;
+            left: $spacer * 1.75;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .member {
+            height: 450px;
+            background-size: cover;
+            background-position: center bottom;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            z-index: 1;
+
+            &:hover {
+                border-radius: $border-radius;
+                margin-top: -$spacer * 0.2;
+
+                & + .shadow {
+                    visibility: visible;
+                    opacity: 1;
+                    bottom: $spacer * 0.2;
+                }
+            }
+        }
+    }
+}
+
+.team-modal {
+    min-width: 100%;
+    max-width: 100%;
+    height: 100%;
+
+    .content {
+        padding: $spacer * 3;
+    }
+
+    .header {
+        height: 350px;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .sub-title {
+        font-size: $font-size-base * 0.875;
+    }
+
+    .description {
+        line-height: $font-size-base * 1.625;
+        font-size: $font-size-base * 0.875;
+    }
+
+    .demographics {
+        font-size: $font-size-base * 0.875;
+    }
+
+    .modal-content {
+        height: 100%;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    .team-modal {
+        .content {
+            padding: $spacer * 1.5 $spacer * 2;
+        }
+    }
+}
